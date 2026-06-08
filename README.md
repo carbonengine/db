@@ -14,7 +14,7 @@ By submitting a pull request or otherwise contributing to this project, you agre
 
 © 2026 CCP Games 
 
-This software is provided by CCP Games and does not include or distribute any third-party libraries or frameworks. 
+This software is provided by CCP Games and does not include or distribute any third-party libraries or frameworks. Third-party dependencies are referenced but not distributed, and remain governed by their own respective licenses.
 
 Trademark Notice: CCP Games is a trademark of CCP ehf. 
 
