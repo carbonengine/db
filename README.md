@@ -1,4 +1,7 @@
 # carbon-db
+
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 Wrapper for game server database access
 
 ## 🛠️ Building
