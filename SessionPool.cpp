@@ -24,7 +24,7 @@
 	*************************************************************************
 */
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "SessionPool.h"
 #include <Scheduler.h>
 

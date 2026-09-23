@@ -29,7 +29,7 @@
 #include <string>
 #include <atlstr.h>
 #include <atldbcli.h>
-#include "utils.h"
+#include "Utils.h"
 #include "DelayedException.h"
 #include "StringStore.h"
 #include "BlockAllocator.h"

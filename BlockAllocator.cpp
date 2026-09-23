@@ -17,7 +17,7 @@
 	*************************************************************************
 */
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "BlockAllocator.h"
 
 //Block allocator members

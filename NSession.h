@@ -26,7 +26,7 @@
 #include "PyTemplates.h"
 
 #include "SessionPool.h"
-#include "tmprowset.h"
+#include "TmpRowset.h"
 
 #include <atlstr.h>
 #include <msdadc.h>	// for IDataConvert

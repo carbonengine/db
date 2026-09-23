@@ -1,5 +1,5 @@
 // Copyright © 2014 CCP ehf.
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "StringStore.h"
 
 template <>
