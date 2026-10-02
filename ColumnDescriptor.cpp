@@ -1,7 +1,7 @@
 // Copyright © 2023 CCP ehf.
 #include "ColumnDescriptor.h"
 
-#include "utils.h"
+#include "Utils.h"
 
 #include <atlstr.h>
 

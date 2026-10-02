@@ -1,7 +1,7 @@
 // Copyright © 2014 CCP ehf.
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "DelayedException.h"
-#include "utils.h"
+#include "Utils.h"
 
 
 DelayedException::DelayedException(const char *msg, HRESULT hr, PyObject *cls) :

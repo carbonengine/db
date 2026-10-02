@@ -3,7 +3,7 @@
 
 #include "PythonBuff.h"
 
-#include "utils.h"
+#include "Utils.h"
 using Utilities::DbExc_RuntimeError;
 
 #include "NSession.h"

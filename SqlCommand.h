@@ -23,7 +23,7 @@
 #define _SQLCOMMAND_H_
 
 #include "StdAfx.h"
-#include "tmprowset.h"
+#include "TmpRowset.h"
 #include "Accessor.h"
 
 class NSession;

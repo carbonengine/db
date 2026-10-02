@@ -3,7 +3,7 @@
 #include "NSession.h"
 #include <Scheduler.h>
 
-#include "utils.h"
+#include "Utils.h"
 using Utilities::DbExc_RuntimeError;
 
 static CcpLogChannel_t s_chNSession = CCP_LOG_DEFINE_CHANNEL( "NSession" );
