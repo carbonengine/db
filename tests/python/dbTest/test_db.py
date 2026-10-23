@@ -32,6 +32,16 @@ class DbUnitTests(unittest.TestCase):
     def tearDown(self):
         print("Done")
 
+    def _get_schema(self, schema_name):
+        procs, tables = self.session.GetSchema(False)
+        schemas = collections.defaultdict(Schema)
+        for schemaProcName, proc in procs.items():
+            if "." in schemaProcName:
+                schemaName, procName = schemaProcName.split(".")
+                schemas[schemaName].procedures[procName] = schemaProcName
+
+        return schemas[schema_name]
+
     @unittest.skipIf(not CONNECTION_STRING, "Skipping because it requires a local db") 
     def testGetSchema(self):
         schema = self.session.GetSchema(False)
@@ -40,18 +50,38 @@ class DbUnitTests(unittest.TestCase):
     @unittest.skipIf(not CONNECTION_STRING, "Skipping because it requires a local db") 
     def testExcuteProcWithStrArgument(self):
         self.session.allowSync = 1
-        procs, tables = self.session.GetSchema(False)
-        schemas = collections.defaultdict(Schema)
-        for schemaProcName, proc in procs.items():
-            if "." in schemaProcName:
-                schemaName, procName = schemaProcName.split(".")
-                schemas[schemaName].procedures[procName] = schemaProcName
-
         # Execute SQL proc
-        zsystemSchema = schemas['zsystem']
+        zsystemSchema = self._get_schema("zsystem")
         zsystemSQLProcName = zsystemSchema.procedures['SQL']
         ret = self.session.Execute(zsystemSQLProcName, ["SELECT a = NULL"])
-        self.assertTrue(ret != None)    
+        self.assertTrue(ret != None)
+
+    @unittest.skipIf(not CONNECTION_STRING, "Skipping because it requires a local db")
+    def testExcuteProcWithTwoLongStringResults(self):
+        """
+        Test that two string keys that should hash the same in the StringStore
+        will return the appropriate values.
+        """
+        self.session.allowSync = 1
+        hash_prefix = '1234567890123456789012345678901234567890123456789012345678901234'
+        first_value = hash_prefix + "HELLO"
+        second_value = hash_prefix + "WORLD"
+
+        zsystemSchema = self._get_schema("zsystem")
+        zsystemSQLProcName = zsystemSchema.procedures['SQL']
+        SQL_CMD = f"""
+            SELECT *
+              FROM (VALUES
+                     ('{first_value}'),
+                     ('{second_value}'))
+                AS tmp(s)
+        """
+        row_set = self.session.Execute(zsystemSQLProcName, [SQL_CMD])[0]
+        descriptor, rows = row_set
+        first_row, second_row = rows
+
+        self.assertEqual(first_row.s, first_value)
+        self.assertEqual(second_row.s, second_value)
 
     @unittest.skipIf(not CONNECTION_STRING, "Skipping because it requires a local db")
     def testExectutingTaskletCanBeSafelyKilled(self):

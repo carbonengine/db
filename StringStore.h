@@ -107,7 +107,24 @@ public:
 
 	    return mElements < rhs.mElements;
     }
-    operator size_t() const { return mHash; }
+
+	bool operator ==(const InternalStoreElement& rhs) const
+    {
+    	if(mPython || rhs.mPython)
+    	{
+    		// Already converted to Python, so the raw data is gone.
+    		return this == &rhs;
+    	}
+
+    	if(mElements != rhs.mElements)
+    	{
+    		return false;
+    	}
+
+    	return memcmp( mData, rhs.mData, mElements * sizeof( DataType ) ) == 0;
+    }
+
+	explicit operator size_t() const { return mHash; }
 
     DelayedException* Claim(SimplePoolAllocator& allocator)
     {
